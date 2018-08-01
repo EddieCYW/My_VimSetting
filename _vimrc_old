@@ -1,0 +1,557 @@
+set rtp+=~/.vim
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'Yggdroot/LeaderF'
+
+Plug 'scrooloose/nerdtree'
+
+Plug 'liuchengxu/space-vim-dark'
+
+Plug 'ludovicchabant/vim-gutentags'
+
+Plug 'skywind3000/gutentags_plus'
+
+Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/vim-preview'
+" lean & mean status/tabline for vim that's light as air
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarToggle'] }
+"Plug 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim'
+Plug 'tittanlee/vim_for_UEFI'
+" A solid language pack for Vim.
+Plug 'sheerun/vim-polyglot'
+" C++ 语法高亮增强，支持 11/14/17 标准
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
+
+"This is Vim syntax files with C++11 support
+Plug 'vim-jp/vim-cpp' , { 'for': ['c', 'cpp'] }
+
+" 额外语法文件
+Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
+Plug 'wsdjeg/FlyGrep.vim'
+"High many words with different colors
+Plug 'lfv89/vim-interestingwords'
+
+Plug 't9md/vim-choosewin'
+
+call plug#end()
+" 禁用 vi 兼容模式
+set nocompatible
+
+" 设置 Backspace 键模式
+set bs=eol,start,indent
+
+set encoding=utf-8
+
+        " set the default encoding of file
+        set fileencoding=utf-8
+        set fileencodings=ucs-bom,utf-8,gbk,gb18030,big5,euc-jp,latin1
+        "set fileencodings=ucs-bom,utf-8,gbk,gb18030,big5,euc-jp,latin1,utf-16le,cp1252,iso-8859-15
+
+        if has('gui_running')
+            " set default lang
+            let $LANG    = "en_us.utf-8"   "// "en_us.utf-8" | "zh_tw.utf-8"
+            set langmenu =en_us.utf-8      "// en_us.utf-8   | zh_tw.utf-8
+            language message en_us.utf-8
+        endif
+
+        " vim need to reload menu with utf-8
+        source $VIMRUNTIME/delmenu.vim
+        source $VIMRUNTIME/menu.vim
+
+    if !exists('g:vim_leader')
+        let mapleader = ','
+    else
+        let mapleader=g:vim_leader
+    endif
+
+    if !exists('g:vim_localleader')
+        let maplocalleader = '_'
+    else
+        let maplocalleader=g:vim_localleader
+    endif
+"----------------------------------------------------------------------
+" copy-paste with other program
+"----------------------------------------------------------------------
+if has('clipboard')
+    if has('unnamedplus')  " When possible use + register for copy-paste
+        set clipboard=unnamed,unnamedplus
+    else         " On mac and Windows, use * register for copy-paste
+        set clipboard=unnamed
+    endif
+endif
+
+" LeaderF configuration {
+
+    "let g:Lf_PythonVersion = 3
+    let g:Lf_UseVersionControlTool = 0
+    let g:Lf_WindowPosition ='top'
+    let g:Lf_WindowHeight = 0.3
+    let g:Lf_PreviewCode = 0
+    let g:Lf_ShowRelativePath = 1
+    "let g:Lf_DefaultMode = 'FullPath'
+    let g:Lf_FollowLinks = 1
+    "let g:Lf_ShortcutF = '<c-f>'
+    "let g:Lf_ShortcutB = '<c-b>'
+    let g:Lf_DefaultExternalTool = 'rg'
+    "let g:Lf_ExternalCommand = 'rg --files --hidden --no-ignore "%s"'
+    let g:Lf_ExternalCommand = 'rg --files --no-ignore --hidden -g !.git "%s"'
+
+    "let g:Lf_CacheDirectory = g:leaderf_cache_dir
+
+
+    let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+    "let g:Lf_WorkingDirectoryMode = 'Ac'
+
+    " fuzzy search ignore folder name and filename extension
+    let g:Lf_WildIgnore = {
+        \'dir': ['.svn','.git','.hg'],
+        \'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+    \}
+
+    " mru ignore filename extension
+    let g:Lf_MruFileExclude = ['*.so', '*.exe', '*.py[co]', '*.sw?', '~$*', '*.bak', '*.tmp', '*.dll']
+
+    let g:Lf_PreviewResult = {
+        \'File'        : 0,
+        \'Buffer'      : 0,
+        \'Mru'         : 0,
+        \'Tag'         : 0,
+        \'BufTag'      : 0,
+        \'Function'    : 0,
+        \'Line'        : 0,
+        \'Colorscheme' : 1
+    \}
+
+    "let g:Lf_StlColorscheme = 'powerline'
+    "let g:Lf_StlSeparator = {'left':'??, 'right':'??}
+    highlight Lf_hl_match gui=bold guifg=Blue cterm=bold ctermfg=21
+    highlight Lf_hl_matchRefine  gui=bold guifg=Magenta cterm=bold ctermfg=201
+
+" }
+"ctrl sf prevent windows from close
+let g:ctrlsf_auto_close = {
+            \ "normal" : 0,
+            \ "compact": 0
+            \ }
+"=======================================
+" CtrlSF backend args plus
+"=======================================
+let g:rg_args_map = {
+            \ 'c'      : '*.c',
+            \ 'h'      : '*.h',
+            \ 'dsc'    : '*.dsc',
+            \ 'dec'    : '*.dec',
+            \ 'fdf'    : '*.fdf',
+            \ 'uni'    : '*.uni',
+            \ 'vfr'    : '*.vfr',
+            \ 'hfr'    : '*.hfr',
+            \ 'inf'    : '*.inf',
+            \ 'uefi'   : '*.c,*.h,*.dec,*.dsc,*.fdf,*.inf,*.uni,*.vfr,*.hfr',
+            \ 'sdl'    : '*.sdl',
+            \ 'sd'     : '*.sd',
+            \ 'txt'    : '*.txt',
+            \ 'mak'    : '*.mak',
+            \ 'equ'    : '*.equ',
+            \ 'cbin'   : '*.cbin',
+            \ 'ami'    : '*.sdl,*.sd,*.txt,*.mak,*.equ,*.cbin',
+            \ 'asm'    : '*.asm,*.s,*.S',
+            \ 'xml'    : '*.xml',
+            \ 'py'     : '*.py',
+            \ 'cfg'    : '*.cfg',
+            \ 'ld'     : '*.ld',
+            \ 'qcom'   : '*.xml,*.py,*.cfg,*.inc,*.ld',
+            \ 'report' : '*.report',
+        \ 'inc'    : '*.inc',
+        \ 'bat'    : '*.bat'
+            \ }
+
+let g:rg_cmd_list = {
+    \ 'def' : ['--pretty'],
+    \ 'inc' : ['--pretty --type-add "fexts:{', '}" -tfexts'],
+    \ 'exc' : ['--pretty --type-add "fexts:{', '}" --type-not fexts']
+\ }
+
+function! s:CtrlSFBackEndArgsOptions(...)
+    let filter       = ''
+    let filter_flag  = 0
+    let exclude_flag = 0
+
+    for args in a:000
+        if args == '!'
+            let exclude_flag = 1
+        else
+            let filter_flag = 1
+            let args_list = split(args, ',')
+            for key in args_list
+                if has_key(g:rg_args_map, key)
+                    let filter = !strlen(filter) ? filter.g:rg_args_map[key] : filter.','.g:rg_args_map[key]
+                endif
+            endfor
+        endif
+    endfor
+
+        if filter_flag
+            if exclude_flag
+                if has_key(g:rg_cmd_list, 'exc')
+                    let cmd_format = g:rg_cmd_list['exc']
+                endif
+            else
+                if has_key(g:rg_cmd_list, 'inc')
+                    let cmd_format = g:rg_cmd_list['inc']
+                endif
+            endif
+
+            let cmd_package = join(cmd_format, filter)
+        else
+            if has_key(g:rg_cmd_list, 'def')
+                let cmd_format = g:rg_cmd_list['def'][0]
+            endif
+
+            let cmd_package = cmd_format
+        endif
+
+        " override rg command to ctrlsf
+        if has_key(g:ctrlsf_extra_backend_args, 'rg')
+            let g:ctrlsf_extra_backend_args['rg'] = cmd_package
+        endif
+    echo g:ctrlsf_extra_backend_args['rg']
+endfunc
+command! -nargs=* CtrlSFOptions call s:CtrlSFBackEndArgsOptions(<f-args>)
+nmap <F10> :CtrlSFOptions 
+nmap <F11> :AsyncRun rg --vimgrep -i -g 
+" LeaderF key-mapping {
+    " copy current file path to system pasteboard, m-c 是alt + c
+    map <silent><m-c> :let @* = expand("%")<cr>:echo "Copied: ".expand("%")<cr>
+    map <f2> :noh<cr>
+   " move to next buffer
+   map <silent><m-n> :bn<cr>
+   " move to previou buffer
+    map <silent><C-Tab> :bp<cr>
+    "close current window
+    map <F4> :bd<cr>
+    map <C-Up> :ts  <c-r><c-w><cr>
+    map <m-Left> :1po<cr>
+    "show function list by pressing F8
+    map <F8> :TagbarToggle<CR>
+    "Call Project_build.bat to build project
+    map <F9> :AsyncRun Project_Build.bat 
+    map <c-f> :Leaderf file --fullPath --bottom<cr>
+    map <c-b> :Leaderf buffer --bottom<cr>
+    map <c-s> :Leaderf tag --bottom<cr>
+    map <leader>f :Leaderf function --right<cr>
+    map <leader>fe :Leaderf function --right --stayOpen<cr>
+    map <leader>sh :Leaderf searchHistory --bottom<cr>
+    map <leader>ls :Leaderf self --bottom --stayOpen<cr>
+    map <C-n> :NERDTreeToggle<CR>
+    noremap <silent><Space>gs :GscopeFind s <c-r><c-w><cr>
+    noremap <silent><Space>gg :GscopeFind g <c-r><c-w><cr>
+    noremap <silent><Space>gc :GscopeFind c <c-r><c-w><cr>
+    noremap <silent><Space>gt :GscopeFind t <c-r><c-w><cr>
+
+    " move to and maximize the below split
+    "map <C-J> <C-W>j<C-W>_
+    map <c-j> <c-w>j
+
+    " move to and maximize the ablove split
+    "map <C-K> <C-W>k<C-W>_
+    map <c-k> <c-w>k
+
+    " move to and maximize the left split
+    "nmap <c-h> <c-w>h<c-w><bar>
+     nmap <c-h> <c-w>h
+
+    " move to and maximize the rgiht split
+    "nmap <c-l> <c-w>l<c-w><bar>
+    nmap <c-l> <c-w>l
+
+    nmap <leader>sf :CtrlSF 
+    nmap <leader>st :CtrlSFToggle<cr>
+    nmap <leader>sd :CtrlSFStop<cr>
+    "remap select all to Ctrl+a
+    map <C-a> <esc>ggVG<CR>
+    "FlyGrep hotkey definition
+    nnoremap <Space>fg :FlyGrep<cr> 
+    "hex mode view binary file
+    nnoremap <Space>he :%!xxd<cr>
+    "hex mode edit binary file, make sure :w after did that to save it 
+    nnoremap <Space>hs :%!xxd -r<cr>
+
+    " toggle relative line number
+    noremap <silent><leader>rl :call g:Relative_number_toggle()<cr>
+
+    nmap  -  <Plug>(choosewin)
+" }
+
+"show page number 
+let g:airline#extensions#tabline#buffer_nr_show = 1
+" auto refresh air-line after executing the bufferdelete command
+autocmd BufDelete * call airline#extensions#tabline#buflist#invalidate()
+
+" vim-gutentags configuration {
+
+    " GTAGSLABEL ?? gtags ?? C/C++/Java ?????????????? gtags ?????,??????? pygments ??
+    "let $GTAGSLABEL = 'native-pygments'
+    let $GTAGSLABEL = 'native'
+
+    " ????????,?????? native-pygments ? language map ???,
+    " Windows ??? gtags/share/gtags/gtags.conf,Linux ??? /usr/local/share/gtags ??,
+    " ???????? ~/.globalrc ,Vim ?????????
+    "if WINDOWS()
+    "    let $GTAGSCONF = 'C:/Utility/share/gtags/gtags.conf'
+    "else
+    "    let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
+    "endif
+
+    "Defines whether Gutentags should be enabled 
+    "let g:gutentags_enabled = 0 
+
+    " Defines some advanced commands like 
+    " |GutentagsToggleEnabled| and |GutentagsUnlock| 
+    "let g:gutentags_define_advanced_commands = 1
+
+    " gutentags ?????????,??????????????????/???
+    let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project','MdePkg']
+
+    " ???????????
+    let g:gutentags_ctags_tagfile = '.tags'
+
+    " ???????????? ~/.cache/tags ????????,???
+    let g:gutentags_cache_dir = expand('~/.vim/cache/tags')
+    "let g:gutentags_cache_dir =  g:tags_cache_dir
+
+    " ????????
+    let g:gutentags_modules = []
+
+    " ??? ctags ?????????? ctags ??
+    if executable('ctags')
+        let g:gutentags_modules += ['ctags']
+    endif
+
+    " ??? gtags ?????????? gtags ???
+    if executable('gtags') && executable('gtags-cscope')
+        let g:gutentags_modules += ['gtags_cscope']
+    endif
+
+    " ?? ctags ???
+    let g:gutentags_ctags_extra_args = []
+    let g:gutentags_ctags_extra_args = ['-R']
+    let g:gutentags_ctags_extra_args = ['--sort=foldcase']
+    " $ ctags --list-kinds=C
+    " d  macro definitions
+    " e  enumerators (values inside an enumeration)
+    " f  function definitions
+    " g  enumeration names
+    " h  included header files
+    " l  local variables [off]
+    " m  struct, and union members
+    " p  function prototypes [off]
+    " s  structure names
+    " t  typedefs
+    " u  union names
+    " v  variable definitions
+    " x  external and forward variable declarations [off]
+    " z  function parameters inside function definitions [off]
+    " L  goto labels [off]
+    " let g:gutentags_ctags_extra_args += ['--C-kinds=+defghlmpstuvxz']
+    let g:gutentags_ctags_extra_args += ['--C-kinds=+pxzL']
+    " $ ctags --list-extras
+    " #LETTER NAME              ENABLED LANGUAGE FIXED DESCRIPTION
+    " -       anonymous         yes     NONE     no    Include tags for non-named objects like lambda
+    " -       subword           no      NONE     no    Include tags for subwords generated by splitting the original tag (only for ctags development)
+    " F       fileScope         yes     NONE     no    Include tags of file scope
+    " f       inputFile         no      NONE     no    Include an entry for the base file name of every input file
+    " g       guest             no      NONE     no    Include tags generated by guest parsers
+    " p       pseudo            yes     NONE     no    Include pseudo tags
+    " q       qualified         no      NONE     no    Include an extra class-qualified tag entry for each tag
+    " r       reference         no      NONE     no    Include reference tags
+    " s       subparser         yes     NONE     no    Include tags generated by subparsers
+    " -       funcmap           yes     QemuHX   no    Include mapping SQMP to C function name
+    " -       whitespaceSwapped yes     Robot    no    Include tags swapping whitespace and underscore chars
+    let g:gutentags_ctags_extra_args += ['--extras=+fq']
+    "let g:gutentags_ctags_extra_args += ['--exclude=Build']
+    " $ ctags --list-fields
+    " #LETTER NAME           ENABLED LANGUAGE         JSTYPE FIXED DESCRIPTION
+    " N       name           yes     NONE             s--    yes   tag name
+    " F       input          yes     NONE             s--    yes   input file
+    " P       pattern        yes     NONE             s-b    yes   pattern
+    " C       compact        no      NONE             s--    no    compact input line (used only in xref output)
+    " E       extras         no      NONE             s--    no    Extra tag type information
+    " K       NONE           no      NONE             s--    no    Kind of tag as full name
+    " R       NONE           no      NONE             s--    no    Marker (R or D) representing whether tag is definition or reference
+    " S       signature      no      NONE             s--    no    Signature of routine (e.g. prototype or parameter list)
+    " Z       scope          no      NONE             s--    no    Include the "scope:" key in scope field (use s) in tags output, scope name in xref output
+    " a       access         no      NONE             s--    no    Access (or export) of class members
+    " e       end            no      NONE             -i-    no    end lines of various items
+    " f       file           yes     NONE             --b    no    File-restricted scoping
+    " i       inherits       no      NONE             s-b    no    Inheritance information
+    " k       NONE           yes     NONE             s--    no    Kind of tag as a single letter
+    " l       language       no      NONE             s--    no    Language of input file containing tag
+    " m       implementation no      NONE             s--    no    Implementation information
+    " n       line           no      NONE             -i-    no    Line number of tag definition
+    " p       scopeKind      no      NONE             s--    no    Kind of scope as full name
+    " r       roles          no      NONE             s--    no    Roles
+    " s       NONE           yes     NONE             s--    no    Scope of tag definition (`p' can be used for printing its kind)
+    " t       typeref        yes     NONE             s--    no    Type and name of a variable or typedef
+    " x       xpath          no      NONE             s--    no    xpath for the tag
+    " z       kind           no      NONE             s--    no    Include the "kind:" key in kind field (use k or K) in tags output, kind full name in xref output
+    " -       properties     no      C                s--    no    properties (static, inline, mutable,...)
+    " -       captures       no      C++              s--    no    lambda capture list
+    " -       name           yes     C++              s--    no    aliased names
+    " -       properties     no      C++              s--    no    properties (static, inline, mutable,...)
+    " -       template       no      C++              s--    no    template parameters
+    " -       properties     no      CUDA             s--    no    properties (static, inline, mutable,...)
+    " -       assignment     yes     LdScript         s--    no    how a value is assigned to the symbol
+    " -       sectionMarker  no      Markdown         s--    no    character used for declaring section(#, ##, =, or -)
+    " -       version        no      Maven2           s--    no    version of artifact
+    " -       home           yes     Passwd           s--    no    home directory
+    " -       shell          yes     Passwd           s--    no    login shell
+    " -       decorators     no      Python           s--    no    decorators on functions and classes
+    " -       sectionMarker  no      ReStructuredText s--    no    character used for declaring section
+    let g:gutentags_ctags_extra_args += ['--fields=+niazS']
+
+    " ?? universal-ctags ????????,????
+    let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+
+    " ?? gutentags ???? gtags ???
+    let g:gutentags_auto_add_gtags_cscope = 1
+
+" }
+
+"----------------------------------------------------------------------
+" Dynamic update the AsyncRun start status to airline error section
+"----------------------------------------------------------------------
+function! AsyncRun_Start_Update_Airline()
+    let g:airline_section_temp = g:airline_section_error
+    let g:airline_section_error = airline#section#create_right([
+                \ '[AsyncRun]:%{g:asyncrun_status}',
+                \ g:airline_section_temp,
+                \ ])
+endfunc
+autocmd User AsyncRunStart  call AsyncRun_Start_Update_Airline()
+
+"----------------------------------------------------------------------
+" Dynamic update the AsyncRun stop status to airline error section
+"----------------------------------------------------------------------
+function! AsyncRun_Stop_Update_Airline()
+    let g:airline_section_error = airline#section#create_right([
+                \ g:airline_section_temp
+                \ ])
+endfunc
+autocmd User AsyncRunStop   call AsyncRun_Stop_Update_Airline()
+
+" vim-gutentags key-mapping {
+
+" }
+")
+"toggle relative line numer
+let g:relative_number_enable = 0
+function! g:Relative_number_toggle()
+    if !g:relative_number_enable
+        set relativenumber
+        let g:relative_number_enable = 1
+    else
+        set norelativenumber
+        let g:relative_number_enable = 0
+    endif
+endfunc
+
+set nu
+set hlsearch
+"highligh word during searching 
+set incsearch
+set ignorecase
+set background=dark
+set t_Co=256
+set updatetime=500
+colorscheme space-vim-dark
+
+
+
+        set guifont=Knack_NF:h14,Consolas_NF:h14
+
+
+    " Use ~x on an English Windows version or ~n for French.
+
+        autocmd GUIEnter * simalt ~x
+        simalt ~x
+
+
+
+
+" By default, airline will use unicode symbols if your encoding matches
+" utf-8. If you want the powerline symbols set this variable:
+let g:airline_powerline_fonts = 1
+
+let g:airline_theme     = 'deus'
+" let g:airline_section_b = '%{getcwd()}'
+" let g:airline_section_c = '%F'
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+if get(g:, 'airline_powerline_fonts', 0)
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ''
+  let g:airline_symbols.maxlinenr= ''
+endif
+
+" enable tabline
+set showtabline=2
+let g:airline#extensions#tabline#enabled   = 1
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#tab_nr_type= 2
+let g:airline#extensions#tabline#show_tab_type = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#fnamemod  = ':t'
+let g:airline#extensions#tabline#left_sep = ""
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ""
+let g:airline#extensions#tabline#right_alt_sep = ''
+let g:airline#extensions#tabline#buffers_label = ''
+let g:airline#extensions#tabline#tabs_label = ''
+
+let g:ctrlsf_search_mode      = 'async'
+    let g:ctrlsf_ackprg           = 'rg'
+    let g:ctrlsf_winsize          = '40%'
+    let g:ctrlsf_position         = 'left'
+    let g:ctrlsf_debug_mode       = 0
+    let g:ctrlsf_selected_line_hl = 'op'
+
+    let g:ctrlsf_extra_backend_args = {
+        \ 'pt': '--home-ptignore',
+        \ 'rg': '--pretty',
+    \ }
+
+"preview
+autocmd FileType qf nnoremap <silent><buffer>j <down>:PreviewQuickfix<cr>
+autocmd FileType qf nnoremap <silent><buffer>k <up>:PreviewQuickfix<cr>
+autocmd FileType qf nnoremap <silent><buffer><cr> :pclose <cr> \| <cr>
+" 0 - (h - top)
+" 1 - (h - bottom)
+" 2 - (v - left)
+" 3 - (v - right)
+let greview#preview_position = '3'
+
+set shellslash
+set wildmenu
