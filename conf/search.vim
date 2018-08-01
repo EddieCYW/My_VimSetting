@@ -77,6 +77,12 @@
         \ 'rg': '--pretty',
     \ }
 
+"ctrl sf prevent windows from close
+let g:ctrlsf_auto_close = {
+            \ "normal" : 0,
+            \ "compact": 0
+            \ }
+            
 "=======================================
 " CtrlSF backend args plus
 "=======================================
