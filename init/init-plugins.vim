@@ -48,6 +48,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
 
+  "edit bin file and could search keyword by offset"
+  Plug 'Shougo/vinarise.vim'
 call plug#end()
 
 " }

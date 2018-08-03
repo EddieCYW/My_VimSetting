@@ -96,14 +96,17 @@ let g:rg_args_map = {
             \ 'vfr'    : '*.vfr',
             \ 'hfr'    : '*.hfr',
             \ 'inf'    : '*.inf',
-            \ 'uefi'   : '*.c,*.h,*.dec,*.dsc,*.fdf,*.inf,*.uni,*.vfr,*.hfr',
+            \ 'asl'    : '*.asl',
+            \ 'asi'    : '*.asi',
+            \ 'uefi'   : '*.c,*.h,*.dec,*.dsc,*.fdf,*.inf,*.uni,*.vfr,*.hfr,*.asl,*.ASL',
             \ 'sdl'    : '*.sdl',
             \ 'sd'     : '*.sd',
             \ 'txt'    : '*.txt',
             \ 'mak'    : '*.mak',
             \ 'equ'    : '*.equ',
             \ 'cbin'   : '*.cbin',
-            \ 'ami'    : '*.sdl,*.sd,*.txt,*.mak,*.equ,*.cbin',
+            \ 'cif'    : '*.cif',
+            \ 'ami'    : '*.sdl,*.sd,*.txt,*.mak,*.equ,*.cbin,*.asi,*.cif',
             \ 'asm'    : '*.asm,*.s,*.S',
             \ 'xml'    : '*.xml',
             \ 'py'     : '*.py',
@@ -111,8 +114,8 @@ let g:rg_args_map = {
             \ 'ld'     : '*.ld',
             \ 'qcom'   : '*.xml,*.py,*.cfg,*.inc,*.ld',
             \ 'report' : '*.report',
-        \ 'inc'    : '*.inc',
-        \ 'bat'    : '*.bat'
+            \ 'inc'    : '*.inc',
+            \ 'bat'    : '*.bat'
             \ }
 
 let g:rg_cmd_list = {
