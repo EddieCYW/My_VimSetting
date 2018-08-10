@@ -15,6 +15,8 @@
 " --- space-vim-dark {
 
     colorscheme space-vim-dark
+
+    hi CursorLine guifg=white guibg=purple
 "}
 
 " --- airline {
