@@ -98,6 +98,7 @@ let g:rg_args_map = {
             \ 'inf'    : '*.inf',
             \ 'asl'    : '*.asl',
             \ 'asi'    : '*.asi',
+            \ 'ASL'    : '*.ASL',
             \ 'uefi'   : '*.c,*.h,*.dec,*.dsc,*.fdf,*.inf,*.uni,*.vfr,*.hfr,*.asl,*.ASL',
             \ 'sdl'    : '*.sdl',
             \ 'sd'     : '*.sd',

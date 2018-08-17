@@ -45,6 +45,8 @@
 "}
 
 "Others{
+    " open folder of currently edit file
+    map <C-e> :!start explorer %:p:h:gs?\/?\\\\\\?<CR>
 
     nmap <F10> :CtrlSFOptions 
     

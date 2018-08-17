@@ -51,6 +51,7 @@ command! -nargs=1 LoadScript exec 'so '.g:Eddie_vim_root.'/'.'<args>'
             \ 'search'         : 1,
             \ 'program'        : 1,
             \ 'ui'             : 1,
+	    \ 'YouCompleteMe'  : 1,
         \ }
     endif
 " }

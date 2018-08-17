@@ -50,6 +50,8 @@ call plug#begin('~/.vim/plugged')
 
   "edit bin file and could search keyword by offset"
   Plug 'Shougo/vinarise.vim'
+
+  Plug 'Valloric/YouCompleteMe' 
 call plug#end()
 
 " }
