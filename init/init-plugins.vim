@@ -51,7 +51,11 @@ call plug#begin('~/.vim/plugged')
   "edit bin file and could search keyword by offset"
   Plug 'Shougo/vinarise.vim'
 
-  Plug 'Valloric/YouCompleteMe' 
+  Plug 'Valloric/YouCompleteMe'
+  
+  "syntax for ASL/asl code"
+  Plug 'martinlroth/vim-acpi-asl'
+
 call plug#end()
 
 " }
