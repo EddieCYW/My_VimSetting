@@ -56,6 +56,8 @@ call plug#begin('~/.vim/plugged')
   "syntax for ASL/asl code"
   Plug 'martinlroth/vim-acpi-asl'
 
+  Plug 'terryma/vim-multiple-cursors'
+
 call plug#end()
 
 " }

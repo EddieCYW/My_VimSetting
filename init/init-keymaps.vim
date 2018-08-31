@@ -70,7 +70,7 @@
     "show function list by pressing F8
     map <F8> :TagbarToggle<CR>   
     
-    map <C-n> :NERDTreeToggle<CR> 
+    map <F5> :NERDTreeToggle<CR> 
     
     noremap <silent><Space>gs :GscopeFind s <c-r><c-w><cr>
     noremap <silent><Space>gg :GscopeFind g <c-r><c-w><cr>
@@ -160,3 +160,4 @@
             "inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
 " }
+
