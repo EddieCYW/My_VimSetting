@@ -143,7 +143,9 @@
 
 " }
 
-
+"---Surroundings{
+   :let g:surround_45 = "\//AMI_OVERRIDE_START >>> \r \// AMI_OVERRIDE_END <<<"
+"---}
 " --- gutentags_plus {
 
     " you can disable the default keymaps by:

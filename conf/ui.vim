@@ -136,3 +136,4 @@
   "add one more color scheme, totally color number is 7"
   let g:interestingWordsGUIColors = ['#aeee00', '#ff0000', '#0000ff', '#b88823', '#ffa724', '#ff2c4b', '#cdf015']
 "}
+

@@ -58,6 +58,11 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'terryma/vim-multiple-cursors'
 
+  "Surroundings: //AMI_OVERRIDE_START >>> and //AMI_OVERRIDE_END <<<"
+  Plug 'tpope/vim-surround'
+
+  "draw the line when indent line, e.g. if else"
+  "Plug 'Yggdroot/indentLine'
 call plug#end()
 
 " }
