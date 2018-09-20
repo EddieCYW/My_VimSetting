@@ -56,7 +56,7 @@
     map <f2> :noh<cr>    
     
     " move to next buffer
-    map <silent><m-n> :bn<cr>
+    map <silent><C-s> :bn<cr>
     
     " move to previou buffer
     map <silent><C-Tab> :bp<cr>    
