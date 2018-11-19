@@ -28,8 +28,9 @@
     "    let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
     "endif
 
-    "Defines whether Gutentags should be enabled 
-    "let g:gutentags_enabled = 0 
+    "Defines whether Gutentags should be enabled
+    "Do not gen gtag automatically 
+    let g:gutentags_enabled = 0 
 
     " Defines some advanced commands like 
     " |GutentagsToggleEnabled| and |GutentagsUnlock| 
@@ -139,20 +140,56 @@
     let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
     " 禁止 gutentags 自动链接 gtags 数据库
-    let g:gutentags_auto_add_gtags_cscope = 1
+    let g:gutentags_auto_add_gtags_cscope = 1 
 
 " }
 
-"---Surroundings{
-   :let g:surround_45 = "\//AMI_OVERRIDE_START >>> \r \// AMI_OVERRIDE_END <<<"
-"---}
-" --- gutentags_plus {
+" --- surround {
 
-    " you can disable the default keymaps by:
-    "let g:gutentags_plus_nomap  = 1
+    let g:surround_key_mapping = {}
+    let g:surround_key_mapping.uefi = {
+        \ 'c' : "# AMI_OVERRIDE_START >>> \r # AMI_OVERRIDE_END <<<",
+        \ }
 
-    " set the height of quickfix windws
-    "let g:gutentags_plus_height = g:quickfix_height
-    "let g:gutentags_plus_switch = 0
+    let g:surround_key_mapping.inform = {
+        \ 'c' : "# AMI_OVERRIDE_START >>> \r # AMI_OVERRIDE_END <<<",
+        \ }
+
+    let g:surround_key_mapping.asl = {
+        \ 'c' : "\// AMI_OVERRIDE_START >>> \r \// AMI_OVERRIDE_END <<<",
+        \ }
+
+    let g:surround_key_mapping.sdl = {
+        \ 'c' : "# AMI_OVERRIDE_START >>> \r # AMI_OVERRIDE_END <<<",
+        \ }
+
+    let g:surround_key_mapping.c = {
+        \ 'c' : "\// AMI_OVERRIDE_START >>> \r \// AMI_OVERRIDE_END <<<",
+        \ 's' : "\"\r\" + \\",
+        \ }
+
+    let g:surround_key_mapping.cpp = {
+        \ 'c' : "\// AMI_OVERRIDE_START >>> \r \// AMI_OVERRIDE_END <<<",
+        \ 's' : "\"\r\" + \\",
+        \ }
+
+    function! s:surround_key_setting()
+        let map_type = &filetype
+
+        if !has_key(g:surround_key_mapping, map_type)
+            return
+        endif
+
+        for [key,action] in items(g:surround_key_mapping[map_type])
+            let command = "let " . "b:surround_" . char2nr(key) . " = " .string(action)
+            execute command
+        endfor
+    endfunc
+
+    augroup Surround
+        autocmd!
+        autocmd FileType * call s:surround_key_setting()
+    augroup END
 
 " }
+
