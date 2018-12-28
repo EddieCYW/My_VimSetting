@@ -99,7 +99,7 @@ let g:rg_args_map = {
             \ 'asl'    : '*.asl',
             \ 'asi'    : '*.asi',
             \ 'ASL'    : '*.ASL',
-            \ 'uefi'   : '*.c,*.h,*.dec,*.dsc,*.fdf,*.inf,*.uni,*.vfr,*.hfr,*.asl,*.ASL,*.asm,*.bat',
+            \ 'uefi'   : '*.c,*.h,*.dec,*.dsc,*.fdf,*.inf,*.uni,*.vfr,*.hfr,*.asl,*.ASL,*.asm,*.bat,*.aslc',
             \ 'sdl'    : '*.sdl',
             \ 'sd'     : '*.sd',
             \ 'txt'    : '*.txt',
@@ -116,7 +116,8 @@ let g:rg_args_map = {
             \ 'qcom'   : '*.xml,*.py,*.cfg,*.inc,*.ld',
             \ 'report' : '*.report',
             \ 'inc'    : '*.inc',
-            \ 'bat'    : '*.bat'
+            \ 'bat'    : '*.bat',
+            \ 'aslc'   : '*.aslc'
             \ }
 
 let g:rg_cmd_list = {
