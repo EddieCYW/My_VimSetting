@@ -61,6 +61,7 @@ call plug#begin('~/.vim/plugged')
   "Surroundings: //AMI_OVERRIDE_START >>> and //AMI_OVERRIDE_END <<<"
   Plug 'tpope/vim-surround'
 
+  Plug 'vim-python/python-syntax', { 'for': ['python'] }
   "draw the line when indent line, e.g. if else"
   "Plug 'Yggdroot/indentLine'
 call plug#end()
