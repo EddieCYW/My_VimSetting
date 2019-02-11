@@ -60,7 +60,7 @@
 
     "highlight Lf_hl_match gui=bold guifg=Blue cterm=bold ctermfg=21
     "highlight Lf_hl_matchRefine  gui=bold guifg=Magenta cterm=bold ctermfg=201
-
+    let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
 "  }
 
 " --- ctrlsf {
