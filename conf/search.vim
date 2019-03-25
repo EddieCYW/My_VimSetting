@@ -97,8 +97,8 @@
      " map <leader>fs <Plug>LeaderfRgCwordLiteralNoBoundary --right<cr>
      "map <leader>fs :Leaderf rg --heading -C3 --smart-case -e <c-r>=expand("<cword>")<cr> --fullScreen --match-path<cr>
      map <leader>fs :Leaderf rg --heading -C3 --smart-case --fullScreen --match-path -e 
-     map <leader>fg :LFRGOPTS
-     map <leader>rt :Leaderf rg --recall --left<cr>
+     map <leader>fg :LFRGOPTS 
+     map <leader>rt :Leaderf rg --recall --fullScreen<cr>
 "  }
 
 " --- ctrlsf {

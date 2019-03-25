@@ -142,6 +142,33 @@
     " 禁止 gutentags 自动链接 gtags 数据库
     let g:gutentags_auto_add_gtags_cscope = 1 
 
+
+function! Dsc_open_c_entry()
+    let line = getline('.')
+    let path = substitute(line, '^\s*\(\w*|\)*\(.\{-}\)[\s{]*$', '\2', '')
+    let hitentry = 'false'
+
+    if filereadable(path)
+        let contents = readfile(path)
+        for line in contents
+            let entryname = substitute(line, '^\s*ENTRY_POINT\s*=\s*\(\w\{-}\)\s*$', '\1', '')
+            if entryname != line
+                let hitentry = 'ture'
+                break
+            endif
+        endfor
+
+        if hitentry == 'ture'
+                " to do connect gtag database
+                call setqflist([], 'r')
+                exec 'cs find g '.entryname
+        else
+            echo 'UEFI entry point not found !'
+        endif
+    endif
+endfunc
+
+	autocmd FileType uefi nnoremap <silent><buffer><cr> :call Dsc_open_c_entry()<cr>
 " }
 
 " --- surround {
