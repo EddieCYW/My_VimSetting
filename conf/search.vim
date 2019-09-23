@@ -75,14 +75,15 @@
         \ "--heading -C3",
         \ "--glob=!git/*",
         \ "--hidden",
-        \ "-g *.{c,h,s,S,asm,dec,dsc,fdf,vfr,hfv,sdl,sd,py,xml,asl,asli,tpl,bat,sh,vim,mak,equ,inf,uni,hfr,ASL,aslc,txt,cbin,asi,cif}"
+        \ "-g *.{c,h,s,S,asm,dec,dsc,fdf,vfr,hfv,sdl,sd,py,xml,asl,asli,tpl,bat,sh,vim,mak,equ,inf,uni,hfr,ASL,aslc,txt,cbin,asi,cif,ini}"
     \ ]
 
     function! g:Lf_RgOptions(args)
         " let g:rg_ctrlsf_command_h = '--vimgrep --type-add "fexts:*.{'
         " let g:rg_ctrlsf_command_t = '}" -tfexts'
         if a:args == 'all'
-            let g:extension_file = 'c,h,s,S,asm,dec,dsc,fdf,vfr,hfv,sdl,sd,py,xml,asl,asli,tpl,bat,sh,vim,mak,equ,inf,uni,hfr,ASL,aslc,txt,cbin,asi,cif'
+            "let g:extension_file = 'c,h,s,S,asm,dec,dsc,fdf,vfr,hfv,sdl,sd,py,xml,asl,asli,tpl,bat,sh,vim,mak,equ,inf,uni,hfr,ASL,aslc,txt,cbin,asi,cif,ini,mac,dt'
+            let g:extension_file = '*'
         else
             let g:extension_file = a:args
         endif
@@ -137,7 +138,7 @@ let g:rg_args_map = {
             \ 'asl'    : '*.asl',
             \ 'asi'    : '*.asi',
             \ 'ASL'    : '*.ASL',
-            \ 'uefi'   : '*.c,*.h,*.dec,*.dsc,*.fdf,*.inf,*.uni,*.vfr,*.hfr,*.asl,*.ASL,*.asm,*.bat,*.aslc',
+            \ 'uefi'   : '*.c,*.h,*.dec,*.dsc,*.fdf,*.inf,*.uni,*.vfr,*.hfr,*.asl,*.ASL,*.asm,*.bat,*.aslc,*.ini',
             \ 'sdl'    : '*.sdl',
             \ 'sd'     : '*.sd',
             \ 'txt'    : '*.txt',
@@ -145,7 +146,7 @@ let g:rg_args_map = {
             \ 'equ'    : '*.equ',
             \ 'cbin'   : '*.cbin',
             \ 'cif'    : '*.cif',
-            \ 'ami'    : '*.sdl,*.sd,*.txt,*.mak,*.equ,*.cbin,*.asi,*.cif',
+            \ 'ami'    : '*.sdl,*.sd,*.txt,*.mak,*.equ,*.cbin,*.asi,*.cif,*.mac,*.dt',
             \ 'asm'    : '*.asm,*.s,*.S',
             \ 'xml'    : '*.xml',
             \ 'py'     : '*.py',
@@ -155,7 +156,8 @@ let g:rg_args_map = {
             \ 'report' : '*.report',
             \ 'inc'    : '*.inc',
             \ 'bat'    : '*.bat',
-            \ 'aslc'   : '*.aslc'
+            \ 'aslc'   : '*.aslc',
+            \ 'ini'    : '*.ini'
             \ }
 
 let g:rg_cmd_list = {

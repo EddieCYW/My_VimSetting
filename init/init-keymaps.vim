@@ -11,8 +11,10 @@
     map <c-f> :Leaderf file --fullPath --bottom<cr>
     map <c-b> :Leaderf buffer --bottom<cr>
     map <c-s> :Leaderf tag --bottom<cr>
-    map <leader>f :Leaderf function --right<cr>
-    map <leader>fe :Leaderf function --right --stayOpen<cr>
+    "map <leader>f :Leaderf function --right<cr>
+    "map <leader>fe :Leaderf function --right --stayOpen<cr>
+    " function list
+    map <F8> :Leaderf function --right<cr>
     map <leader>sh :Leaderf searchHistory --bottom<cr>
     map <leader>ls :Leaderf self --bottom --stayOpen<cr>
     nmap <leader>sf :CtrlSF 
@@ -68,8 +70,7 @@
     map <m-Left> :1po<cr>
     
     "show function list by pressing F8
-    map <F8> :TagbarToggle<CR>   
-    
+    "map <F8> :TagbarToggle<CR>   
     map <F5> :NERDTreeToggle<CR> 
     
     noremap <silent><Space>gs :GscopeFind s <c-r><c-w><cr>
