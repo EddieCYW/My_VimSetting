@@ -64,6 +64,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-python/python-syntax', { 'for': ['python'] }
   "draw the line when indent line, e.g. if else"
   "Plug 'Yggdroot/indentLine'
+
+  Plug 'drmikehenry/vim-fontsize'
 call plug#end()
 
 " }
