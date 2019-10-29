@@ -22,7 +22,7 @@ call plug#begin('~/.vim/plugged')
   
   Plug 'vim-airline/vim-airline-themes'
   
-  Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarToggle'] }
+  Plug 'majutsushi/tagbar'
   
   Plug 'dyng/ctrlsf.vim'
   

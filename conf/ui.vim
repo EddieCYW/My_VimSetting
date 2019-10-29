@@ -87,6 +87,8 @@
     let g:airline#extensions#gutentags#enabled      = 1
     " enable/disable vim-capslock integration >
     let g:airline#extensions#capslock#enabled       = 1
+    
+    let g:airline#extensions#tagbar#enabled = 1
 
     " work around to fixed some airline's bug {
 
