@@ -43,3 +43,10 @@ endif
 
 " remove ^M
 set ffs=dos
+
+"set tab to 2 space
+set tabstop=2 shiftwidth=2 expandtab
+
+" move the visual block
+vnoremap K :m '<-2<cr>gv=gv
+vnoremap J :m '>+1<cr>gv=gv
