@@ -1,0 +1,20 @@
+[user]
+	name = eddiechen
+	email = EddieChen@tw.megatrends.com
+[core]
+	autocrlf = false
+[diff]
+    tool = bc
+[difftool "bc"]
+  path = 'C:/Program Files/Beyond Compare 4/BComp.exe'	
+[difftool "bc"]
+    cmd = \"C:/Program Files/Beyond Compare 4/BCompare.exe\" \"$LOCAL\" \"$REMOTE\"  
+[difftool]
+    prompt = false
+[merge]
+  tool = bc
+[mergetool "bc"]
+  path = 'C:/Program Files/Beyond Compare 4/BComp.exe'
+[mergetool "bc"]
+  cmd = \"C:/Program Files/Beyond Compare 4/BComp.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\"	
+	
