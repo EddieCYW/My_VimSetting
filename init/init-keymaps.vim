@@ -162,3 +162,14 @@
 
 " }
 
+"
+"
+"---dirvish {
+"Opens the [count]th parent directory.
+nmap bd <Plug>(dirvish_up)
+"Quits and returns to the original file.
+nmap bq <Plug>(dirvish_quit)
+"
+"
+"}
+

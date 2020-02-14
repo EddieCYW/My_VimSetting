@@ -66,6 +66,10 @@ call plug#begin('~/.vim/plugged')
   "Plug 'Yggdroot/indentLine'
 
   Plug 'drmikehenry/vim-fontsize'
+
+  " open file/folder in vim windows
+  Plug 'justinmk/vim-dirvish'
+
 call plug#end()
 
 " }

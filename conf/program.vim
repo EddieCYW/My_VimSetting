@@ -240,3 +240,36 @@ endfunction
 "initialize the generateUUID function here and map it to a local command
 noremap <Leader>uu :call Generate_UUID()<cr>
 "---}
+
+"
+"
+"---dirvish { 
+function! s:setup_dirvish()
+        if &buftype != 'nofile' && &filetype != 'dirvish'
+            return
+        endif
+        if has('nvim')
+            return
+        endif
+
+        let text = getline('.')
+        if ! get(g:, 'dirvish_hide_visible', 0)
+            exec 'silent keeppatterns g@\v[\/]\.[^\/]+[\/]?$@d _'
+        endif
+
+        exec 'sort ,^.*[\/],'
+        let name = '^' . escape(text, '.*[]~\') . '[/*|@=|\\*]\=\%($\|\s\+\)'
+
+        call search(name, 'wc')
+        noremap <silent><buffer> ~ :Dirvish ~<cr>
+        noremap <buffer> % :e %
+endfunc
+
+augroup DirvishSetup
+        autocmd!
+        autocmd FileType dirvish call s:setup_dirvish()
+augroup END
+"
+"
+"}
+
