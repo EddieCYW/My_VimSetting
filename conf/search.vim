@@ -62,41 +62,25 @@
     "highlight Lf_hl_matchRefine  gui=bold guifg=Magenta cterm=bold ctermfg=201
     let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
 
-    " let g:Lf_RgConfig = [
-    "    \ "--no-ignore",
-    "   \ "-g *.{c,h,s,S,asm,dec,dsc,fdf,vfr,hfv,sdl,sd,py,xml,asl,asli,tpl,bat,sh,vim,mak,equ}",
-    "    \ "--heading -C3",
-    "    \ "--glob=!git/*",
-    "    \ "--hidden"
-    "    \ ]
-
-    let g:Lf_RgConfig = [
+     let g:Lf_RgConfig = [
         \ "--no-ignore",
         \ "--heading -C3",
         \ "--glob=!git/*",
         \ "--hidden",
-        \ "-g *.{c,h,s,S,asm,dec,dsc,fdf,vfr,hfv,sdl,sd,py,xml,asl,asli,tpl,bat,sh,vim,mak,equ,inf,uni,hfr,ASL,aslc,txt,cbin,asi,cif,ini}"
-    \ ]
+     \ ]
 
-    function! g:Lf_RgOptions(args)
-        " let g:rg_ctrlsf_command_h = '--vimgrep --type-add "fexts:*.{'
-        " let g:rg_ctrlsf_command_t = '}" -tfexts'
+     function! g:Lf_RgOptions(args)
         if a:args == 'all'
-            "let g:extension_file = 'c,h,s,S,asm,dec,dsc,fdf,vfr,hfv,sdl,sd,py,xml,asl,asli,tpl,bat,sh,vim,mak,equ,inf,uni,hfr,ASL,aslc,txt,cbin,asi,cif,ini,mac,dt'
-            let g:extension_file = '*'
+            let g:Lf_RgConfig = ["--no-ignore","--heading -C5","--glob=!git/*","--hidden"]
         else
-            let g:extension_file = a:args
+            let g:Lf_RgConfig = ["--no-ignore","--heading -C5","--glob=!git/*","--hidden","-g *.{".a:args."}"]
         endif
 
         " override rg command to leaderf
-        let g:Lf_RgConfig[len(g:Lf_RgConfig) - 1] = substitute(g:Lf_RgConfig[len(g:Lf_RgConfig) - 1], '-g \*\.{.*}', '-g \*\.{'.g:extension_file.'}', '')
+       "echo g:Lf_RgConfig[len(g:Lf_RgConfig) - 1]
+     endfunc
 
-        echo g:Lf_RgConfig[len(g:Lf_RgConfig) - 1]
-    endfunc
-    command! -nargs=1 LFRGOPTS call g:Lf_RgOptions('<args>')
-
-     " map <leader>fs <Plug>LeaderfRgCwordLiteralNoBoundary --right<cr>
-     "map <leader>fs :Leaderf rg --heading -C3 --smart-case -e <c-r>=expand("<cword>")<cr> --fullScreen --match-path<cr>
+     command! -nargs=1 LFRGOPTS call g:Lf_RgOptions('<args>')
      map <leader>fs :Leaderf rg --heading -C3 --smart-case --fullScreen --match-path -e 
      map <leader>fg :LFRGOPTS 
      map <leader>rt :Leaderf rg --recall --fullScreen<cr>
