@@ -37,7 +37,12 @@
     "let g:gutentags_define_advanced_commands = 1
 
     " gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
-    let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project','MdePkg']
+    " let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project', 'MdePkg']
+    " let g:gutentags_add_default_project_roots = ['.root', '.svn', '.git', '.hg', '.project', 'MdePkg']
+    function! Gutentags_project_root_finder_hook_func(path)
+      return getcwd()
+    endfunction
+    let g:gutentags_project_root_finder = 'Gutentags_project_root_finder_hook_func'
 
     " 所生成的数据文件的名称
     let g:gutentags_ctags_tagfile = '.tags'
@@ -222,8 +227,8 @@ endfunc
 
 "---vim gen guid{
 function! Generate_UUID()
-
-python << EOF
+"if use python2.x, please change to python << EOF, otherwise gen uuid will fail"
+python3 << EOF
 import uuid
 import vim
 
