@@ -228,7 +228,7 @@ endfunc
 "---vim gen guid{
 function! Generate_UUID()
 "if use python2.x, please change to python << EOF, otherwise gen uuid will fail"
-python3 << EOF
+python << EOF
 import uuid
 import vim
 

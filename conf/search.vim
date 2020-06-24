@@ -27,11 +27,12 @@
     let g:Lf_DefaultExternalTool = 'rg'
     "let g:Lf_ExternalCommand = 'rg --files --hidden --no-ignore "%s"'
     let g:Lf_ExternalCommand = 'rg --files --no-ignore --hidden -g !.git "%s"'
-
+    
     "let g:Lf_CacheDirectory = g:leaderf_cache_dir
 
     " 如何识别项目目录，从当前文件目录向父目录递归知道碰到下面的文件/目录
-    let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+    "let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+    let g:Lf_WorkingDirectory =getcwd()
     "let g:Lf_WorkingDirectoryMode = 'Ac'
 
     " fuzzy search ignore folder name and filename extension
@@ -64,16 +65,14 @@
 
      let g:Lf_RgConfig = [
         \ "--no-ignore",
-        \ "--heading -C3",
-        \ "--glob=!git/*",
-        \ "--hidden",
+        \ "-C3",
      \ ]
 
      function! g:Lf_RgOptions(args)
         if a:args == 'all'
-            let g:Lf_RgConfig = ["--no-ignore","--heading -C5","--glob=!git/*","--hidden"]
+            let g:Lf_RgConfig = ["--no-ignore","-C3","--glob=!git/*"]
         else
-            let g:Lf_RgConfig = ["--no-ignore","--heading -C5","--glob=!git/*","--hidden","-g *.{".a:args."}"]
+            let g:Lf_RgConfig = ["--no-ignore","-C3","--glob=!git/*","-g *.{".a:args."}"]
         endif
 
         " override rg command to leaderf
@@ -81,7 +80,7 @@
      endfunc
 
      command! -nargs=1 LFRGOPTS call g:Lf_RgOptions('<args>')
-     map <leader>fs :Leaderf rg --heading -C3 --smart-case --fullScreen --match-path -e 
+     map <leader>fs :Leaderf rg -C3 --smart-case --fullScreen --match-path -e 
      map <leader>fg :LFRGOPTS 
      map <leader>rt :Leaderf rg --recall --fullScreen<cr>
 "  }
