@@ -86,6 +86,9 @@
     
     "hex mode edit binary file, make sure :w after did that to save it 
     nnoremap <Space>hs :%!xxd -r<cr>    
+    
+    "add hotkey 'ctrl+r shift+' to represent insert key"
+    cmap <s-insert> <c-r>+
 "}     
 
 "FlyGrep{
