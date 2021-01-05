@@ -14,7 +14,7 @@
     "map <leader>f :Leaderf function --right<cr>
     "map <leader>fe :Leaderf function --right --stayOpen<cr>
     " function list
-    map <F8> :Leaderf function --right<cr>
+    map <F8> :Leaderf! function<cr>
     map <leader>sh :Leaderf searchHistory --bottom<cr>
     map <leader>ls :Leaderf self --bottom --stayOpen<cr>
     nmap <leader>sf :CtrlSF 
@@ -176,3 +176,6 @@ nmap bq <Plug>(dirvish_quit)
 "
 "}
 
+"----LeaderF-tjump {
+nnoremap <c-]> :LeaderfTjump <c-r><c-w><cr>
+"}

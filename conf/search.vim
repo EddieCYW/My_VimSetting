@@ -19,14 +19,15 @@
     let g:Lf_UseVersionControlTool = 0
     "let g:Lf_WindowPosition ='top'
     let g:Lf_WindowHeight = 0.2
-    let g:Lf_PreviewCode = 0
+    let g:Lf_PreviewCode = 1
+    let g:Lf_PreviewInPopup    = 1
     let g:Lf_ShowRelativePath = 1
     "let g:Lf_DefaultMode = 'FullPath'
     let g:Lf_FollowLinks = 1
 
     let g:Lf_DefaultExternalTool = 'rg'
     "let g:Lf_ExternalCommand = 'rg --files --hidden --no-ignore "%s"'
-    let g:Lf_ExternalCommand = 'rg --files --no-ignore --hidden -g !.git "%s"'
+    let g:Lf_ExternalCommand = 'rg --files --no-ignore --hidden -g !.git -g !.repo "%s"'
     
     "let g:Lf_CacheDirectory = g:leaderf_cache_dir
 
@@ -80,7 +81,23 @@
      endfunc
 
      command! -nargs=1 LFRGOPTS call g:Lf_RgOptions('<args>')
-     map <leader>fs :Leaderf rg -C3 --smart-case --fullScreen --match-path -e 
+     
+func! g:Lf_grep(bang, args) abort
+    let inc_ft = ''
+    let query = a:args
+    if empty(query)
+        let query = expand('<cword>')
+    endif
+
+    if a:bang == 0
+        exec 'Leaderf rg --smart-case -e '. query. ' -C0 --top --match-path '
+    else
+        exec 'Leaderf rg --smart-case -e '. query. ' -C5 --reverse --fullScreen --match-path '
+    endif
+endfunc
+command! -bang -nargs=* LFgrep call g:Lf_grep(<bang>0, <q-args>)
+     map <leader>fs :LFgrep! 
+     "map <leader>fs :Leaderf rg -C3 --smart-case --fullScreen --match-path -e 
      map <leader>fg :LFRGOPTS 
      map <leader>rt :Leaderf rg --recall --fullScreen<cr>
 "  }
