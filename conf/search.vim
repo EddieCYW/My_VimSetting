@@ -96,7 +96,7 @@ func! g:Lf_grep(bang, args) abort
     endif
 endfunc
 command! -bang -nargs=* LFgrep call g:Lf_grep(<bang>0, <q-args>)
-     map <leader>fs :LFgrep! 
+     map <leader>fs :LFgrep 
      "map <leader>fs :Leaderf rg -C3 --smart-case --fullScreen --match-path -e 
      map <leader>fg :LFRGOPTS 
      map <leader>rt :Leaderf rg --recall --fullScreen<cr>

@@ -50,3 +50,7 @@ set tabstop=2 shiftwidth=2 expandtab
 " move the visual block
 vnoremap K :m '<-2<cr>gv=gv
 vnoremap J :m '>+1<cr>gv=gv
+
+" show tail space/eol/extend/precedes
+:set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+:set list
