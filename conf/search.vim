@@ -19,7 +19,7 @@ let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_StlSeparator = {'left':'', 'right':''}
 
 let g:Lf_DefaultExternalTool = 'fd'
-let g:Lf_ExternalCommand = 'fd --hidden --type file -E .repo -E .git -E "*.{exe,dll,lib,Lib,pyd,pyc,pyo,so,o}" "%s"'
+let g:Lf_ExternalCommand = 'fd --hidden --type file -E .repo -E .git -E "*.{dll,lib,Lib,pyd,pyo,so,o}" "%s"'
 " let g:Lf_ExternalCommand = 'fd --hidden --type file -E .git "%s"'
 " let g:Lf_DefaultExternalTool = 'rg'
 " let g:Lf_ExternalCommand = 'rg --files -g !.git "%s"'
@@ -79,7 +79,7 @@ let g:Lf_PreviewResult = {
     \ }
 
 " default keymaps
-map <c-f> :Leaderf file<cr>
+map <c-f> :Leaderf file --fullPath --bottom <cr>
 map <c-b> :Leaderf buffer<cr>
 
 let g:Lf_RgConfig = [
