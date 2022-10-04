@@ -2,6 +2,7 @@
 python << END
 import xml.etree.ElementTree as xml
 import os
+import stat
 
 source = ''
 error_value = 0
@@ -16,7 +17,8 @@ if error_value != 1:
     tree = xml.parse('.repo\manifests\\' + descript.get('name'))
     root = tree.getroot()
     for repo in root.iter('project'):
-        source = repo.get('path')+'/.git'
+#        source = repo.get('path')+'/.git'
+	os.chmod(repo.get('path')+'/.git', stat.S_IRWXU|stat.S_IRWXG|stat.S_IRWXO)
 	if os.path.exists(source):
             os.remove(source)    
 END
