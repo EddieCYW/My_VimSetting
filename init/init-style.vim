@@ -20,7 +20,7 @@ set updatetime=500
 " always showtabline
 set showtabline=2
 
-set guifont=Knack_NF:h14,Consolas_NF:h14
+set guifont=Knack_NF:h12,Consolas_NF:h12
 
 set cursorline
 " Use ~x on an English Windows version or ~n for French.
