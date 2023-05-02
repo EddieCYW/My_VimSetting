@@ -1,8 +1,7 @@
-" 定义一个命令用来加载文件
+" remove git
 python << END
 import xml.etree.ElementTree as xml
 import os
-import stat
 
 source = ''
 error_value = 0
@@ -17,10 +16,33 @@ if error_value != 1:
     tree = xml.parse('.repo\manifests\\' + descript.get('name'))
     root = tree.getroot()
     for repo in root.iter('project'):
-#        source = repo.get('path')+'/.git'
-	os.chmod(repo.get('path')+'/.git', stat.S_IRWXU|stat.S_IRWXG|stat.S_IRWXO)
-	if os.path.exists(source):
-            os.remove(source)    
+        source = repo.get('path')+'/.git'	
+        if os.path.exists(source):
+            os.rmdir(source)	    
+END
+
+" remove gitignore
+python << END
+import xml.etree.ElementTree as xml
+import os
+
+source = ''
+error_value = 0
+try:
+    tree = xml.parse('.repo\manifest.xml')
+except:
+    error_value = 1
+if error_value != 1:
+    root = tree.getroot()
+    for descript in root.iter('include'):
+        break
+    tree = xml.parse('.repo\manifests\\' + descript.get('name'))
+    root = tree.getroot()
+    for repo in root.iter('project'):
+        source = repo.get('path')	
+        for root, dirs, files in os.walk(source):
+            if '.gitignore' in files:           
+                os.remove(os.path.join(root, '.gitignore'))	    
 END
 command! -nargs=1 LoadScript exec 'so '.g:Eddie_vim_root.'/'.'<args>'
 
