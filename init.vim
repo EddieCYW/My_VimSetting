@@ -2,6 +2,7 @@
 python << END
 import xml.etree.ElementTree as xml
 import os
+import subprocess
 
 source = ''
 error_value = 0
@@ -18,8 +19,10 @@ if error_value != 1:
     for repo in root.iter('project'):
         source = repo.get('path')+'/.git'	
         if os.path.exists(source):
-            os.rmdir(source)	    
+            cmd = 'cmd /c rd /s /q "{}"'.format(source)
+            subprocess.call(cmd, shell=True)
 END
+
 
 " remove gitignore
 python << END
